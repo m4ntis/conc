@@ -49,19 +49,25 @@ impl Cpu {
         }
     }
 
-    pub fn get_reg(&mut self, reg: Register) -> u32 {
+    // exec_nex fetches and executes the next instruction, returning the number
+    // of cycles the instruction took
+    pub fn exec_next(&mut self) -> Result<usize, String> {
+        Err("Not implemented".to_string())
+    }
+
+    fn get_reg(&mut self, reg: Register) -> u32 {
         *self.get_reg_by_mode(reg)
     }
 
-    pub fn set_reg(&mut self, reg: Register, v: u32) {
+    fn set_reg(&mut self, reg: Register, v: u32) {
         *self.get_reg_by_mode(reg) = v;
     }
 
-    pub fn state(&mut self) -> State {
+    fn state(&mut self) -> State {
         (*self.get_reg_by_mode(Register::CPSR) & CPSR_T).into()
     }
 
-    pub fn mode(&mut self) -> Mode {
+    fn mode(&mut self) -> Mode {
         (*self.get_reg_by_mode(Register::CPSR) & MODE_MASK).into()
     }
 
